@@ -1,8 +1,10 @@
 # KH-01-2025
 # Problem Stament - AI Powered Intrustion Detection System Using MicroControllers
+
 #📡 WiFi Intrusion Detection System Dashboard
 Overview
 This project is a WiFi Intrusion Detection System (IDS) designed to monitor nearby WiFi networks and detect potential security threats. The system visualizes real-time network data, highlighting rogue networks and analyzing signal strength and security types through interactive charts. It uses HTML, Bootstrap, and Chart.js for the front end, with JavaScript to handle dynamic data updates.
+
 #🎯 Key Features
 Real-Time Network Scanning: Fetches data from an API to display available WiFi networks, including SSID, BSSID, Signal Strength (RSSI), and Encryption type.
 Threat Detection & Alerts: Identifies and alerts users about insecure (Open) networks through blinking alerts and color-coded tables.
