@@ -1,58 +1,56 @@
-#include <Arduino.h>
 #include <WiFi.h>
+#include <ArduinoJson.h>
 
-const char* ssid = "Lucifer";
-const char* password = "123456789";
+// Wi-Fi Credentials
+const char* ssid = "Rahul";    
+const char* password = "12345678";    
 
 void setup() {
-  Serial.begin(115200);
-  delay(10);
-
-  WiFi.mode(WIFI_STA);
-  WiFi.disconnect();
-  delay(100);
-
-  Serial.println("Setup done");
-
-  Serial.print("Connecting to ");
-  Serial.println(ssid);
+  Serial.begin(9600);  
+  WiFi.mode(WIFI_STA);  // Ensure ESP32 is in Station mode
+  
+  Serial.print("🔗 Connecting to WiFi...");
   WiFi.begin(ssid, password);
 
-  while (WiFi.status() != WL_CONNECTED) {
-    delay(500);
+  unsigned long startAttemptTime = millis(); // Timeout for WiFi connection
+  
+  while (WiFi.status() != WL_CONNECTED && millis() - startAttemptTime < 15000) { // 15s timeout
     Serial.print(".");
+    delay(1000);
   }
 
-  Serial.println("");
-  Serial.println("WiFi connected");
-  Serial.println("IP address: ");
-  Serial.println(WiFi.localIP());
+  if (WiFi.status() == WL_CONNECTED) {
+    Serial.println("\n✅ Connected to WiFi!");
+  } else {
+    Serial.println("\n❌ Failed to connect to WiFi");
+  }
+}
+
+void scanWiFiNetworks() {
+  Serial.println("🔍 Scanning for Wi-Fi networks...");
+  
+  int numNetworks = WiFi.scanNetworks();
+  if (numNetworks == 0) {
+    Serial.println("{\"status\":\"No networks found\"}");
+  } else {
+    JsonDocument jsonDoc;  // Use the new method instead of DynamicJsonDocument
+    JsonArray networksArray = jsonDoc["networks"].to<JsonArray>();  // New approach
+
+    for (int i = 0; i < numNetworks; i++) {
+      JsonObject network = networksArray.add<JsonObject>();
+      network["SSID"] = WiFi.SSID(i);
+      network["BSSID"] = WiFi.BSSIDstr(i);
+      network["RSSI"] = WiFi.RSSI(i);
+      network["Encryption"] = (WiFi.encryptionType(i) != WIFI_AUTH_OPEN) ? "Encrypted" : "Unencrypted";
+    }
+
+    String jsonString;
+    serializeJson(jsonDoc, jsonString);
+    Serial.println(jsonString);  // Send JSON via Serial
+  }
 }
 
 void loop() {
-  Serial.println("Scanning for available networks...");
-  int n = WiFi.scanNetworks();
-  Serial.println("Scan done");
-  if (n == 0) {
-    Serial.println("No networks found");
-  } else {
-    Serial.print(n);
-    Serial.println(" networks found");
-    for (int i = 0; i < n; ++i) {
-      Serial.print(i + 1);
-      Serial.print(": ");
-      Serial.print(WiFi.SSID(i));
-      Serial.print(" (");
-      Serial.print(WiFi.RSSI(i));
-      Serial.print(") ");
-      Serial.print(WiFi.BSSIDstr(i));
-      Serial.print(" ");
-      Serial.print(WiFi.channel(i));
-      Serial.print(" ");
-      Serial.print(WiFi.encryptionType(i) == WIFI_AUTH_OPEN ? "Malicious" : "Safe");
-      Serial.println();
-      delay(10);
-    }
-  }
-  delay(5000);
+  scanWiFiNetworks();
+  delay(10000);  // Scan every 10 seconds
 }
