@@ -16,3 +16,10 @@ Line Chart: Shows signal strength variations for each network.
 Bar Chart: Displays the distribution of security types (e.g., WPA, WPA2, Open).
 Dynamic Threat Analysis Table: Provides a detailed overview of each network's security status.
 Responsive Design: Built with Bootstrap for optimal viewing on both desktop and mobile devices.
+
+# Outputs 
+![image](https://github.com/user-attachments/assets/518ca8bf-d097-4b47-8a9f-84b6bb47a702)
+# Dashboard For Realtime Analysis
+![image](https://github.com/user-attachments/assets/8781b4a8-83ea-4a68-a07a-3992500c6b07)
+
+
