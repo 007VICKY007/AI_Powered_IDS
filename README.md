@@ -286,3 +286,7 @@ A: Yes, compatible microcontrollers support both 2.4GHz and 5GHz bands.
 - **v2.0.0**: Complete dashboard redesign (current)
 
 ---
+# Outputs 
+![image](https://github.com/user-attachments/assets/518ca8bf-d097-4b47-8a9f-84b6bb47a702)
+# Dashboard For Realtime Analysis
+![image](https://github.com/user-attachments/assets/8781b4a8-83ea-4a68-a07a-3992500c6b07)
