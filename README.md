@@ -279,15 +279,6 @@ A: Range varies by environment, typically 50-100 meters with standard antenna.
 **Q: Does this work with 5GHz networks?**
 A: Yes, compatible microcontrollers support both 2.4GHz and 5GHz bands.
 
-## 📅 Roadmap
-
-### Upcoming Features
-- [ ] Machine learning threat detection
-- [ ] Mobile app companion
-- [ ] Cloud integration options
-- [ ] Advanced reporting features
-- [ ] Multi-sensor deployment support
-
 ### Version History
 - **v1.0.0**: Initial release with basic detection
 - **v1.1.0**: Added real-time visualization
